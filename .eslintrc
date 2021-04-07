@@ -1,0 +1,10 @@
+{
+  "extends": "eslint-config-ali/vue",
+  "parser": "vue-eslint-parser",
+  "rules": {
+    "no-param-reassign": "off"
+  },
+  "globals": {
+    "__NOEDE_ENV__": true
+  }
+}
