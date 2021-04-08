@@ -1,3 +1,4 @@
+'use strict';
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -52,7 +53,7 @@ module.exports = {
       __BASE_URL__: JSON.stringify(proxy.baseUrl),
     }),
     new ProgressBarPlugin({
-      format: `${chalk.cyan.bold('Compilation:') + chalk.magenta.bold('[:bar]')} ${chalk.cyan.bold(':percent')}  (time：${chalk.cyan.bold(':elapsed')}s)`,
+      format: `${chalk.cyan.bold('Compilation:') + chalk.magenta.bold('[:bar]')} ${chalk.cyan.bold(':percent')} (time：${chalk.cyan.bold(':elapsed')}s)`,
       width: 500,
       stream: process.stdout ? process.stdout : undefined,
     }),
