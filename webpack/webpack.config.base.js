@@ -7,7 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path = require('path');
 const chalk = require('chalk');
 const { version } = require('../package.json');
-const { proxy } = require('../webpack-server/config');
+const { proxy } = require('../server/config');
 
 const devMode = process.env.NODE_ENV === 'development';
 
