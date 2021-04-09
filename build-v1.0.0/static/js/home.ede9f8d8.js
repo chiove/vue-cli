@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{155:function(t,n,e){"use strict";e.r(n);var o={props:[],name:"",components:{},data:function(){return{}},created:function(){},mounted:function(){},methods:{handleClick:function(){this.$store.commit("home/setState",{c:77}),this.$router.push("/")}}},c=e(52),i=Object(c.a)(o,(function(){var t=this.$createElement;return(this._self._c||t)("div",{on:{click:this.handleClick}},[this._v("我是首页")])}),[],!1,null,null,null);n.default=i.exports}}]);
+//# sourceMappingURL=home.ede9f8d8.js.map
