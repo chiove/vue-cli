@@ -8,12 +8,27 @@ const JSZip = require('jszip');
 
 const zip = new JSZip();
 const target = webpackConfig.output.path;
-const os = /^win/.test(process.platform);
-const name = target.slice(os ? target.lastIndexOf('\\') + 1 : target.lastIndexOf('/'));
 const compiler = webpack(webpackConfig);
+
+const readDirectory = (zipFolder, path, folder) => {
+  const files = fs.readdirSync(path);
+  files.forEach((fileName) => {
+    const filePath = `${path}/${fileName}`;
+    const file = fs.statSync(filePath);
+    if (file.isDirectory()) {
+      const fileFolder = folder ? `${folder}/${fileName}` : fileName;
+      const zipFolderChild = zip.folder(fileFolder);
+      // eslint-disable-next-line no-unused-vars
+      readDirectory(zipFolderChild, filePath, fileFolder);
+    } else {
+      zipFolder.file(fileName, fs.readFileSync(filePath));
+    }
+  });
+};
+
 compiler.run((err) => {
   if (!err) {
-    zip.folder(name);
+    readDirectory(zip, target, '');
     zip.generateAsync({
       type: 'nodebuffer',
       compression: 'DEFLATE',
