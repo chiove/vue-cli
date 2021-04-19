@@ -36,10 +36,6 @@ export default {
       demoGet: 'demo/get',
       demoPost: 'demo/post',
     }),
-    onChange(v) {
-      this.val = v;
-      console.log(this.val);
-    },
   },
 };
 </script>
