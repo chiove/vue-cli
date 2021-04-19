@@ -3,8 +3,9 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const webpackConfig = require('../webpack/webpack.config.dev');
+const { spawn } = require('child_process');
 const chalk = require('chalk');
-const { port, proxy } = require('./config');
+const { port, proxy, childProcess } = require('./config');
 
 const compiler = webpack(webpackConfig);
 const netWork = require('os').networkInterfaces();
@@ -22,9 +23,11 @@ const server = new WebpackDevServer(compiler, {
     },
   },
 });
-
 server.listen(port, '127.0.0.1', () => {
   compiler.hooks.done.tap('compiler', () => {
+    if (childProcess) {
+      spawn('node', [`${__dirname}/app.js`]);
+    }
     console.log(chalk.green('-------------------- Compile success! --------------------'));
     setTimeout(() => {
       console.log(chalk.green('\r\nApp running at:'));

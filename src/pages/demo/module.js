@@ -1,7 +1,11 @@
+import { demoGet, demoPost } from 'src/api/demo';
+
 export default {
   name: 'demo',
   namespaced: true,
   state: {
+    name: '',
+    password: '',
   },
   mutations: {
     setState: (state, payload) => {
@@ -17,8 +21,20 @@ export default {
 
   },
   actions: {
-    demo: ({ commit, state, dispatch }, payload) => {
-
+    get: async ({ commit }, payload) => {
+      const res = await demoGet(payload);
+      if (res.code === 200) {
+        commit('setState', {
+          name: res.data.name,
+          password: res.data.password,
+        });
+      }
+      return res;
+    },
+    post: async ({ commit }, payload) => {
+      const res = await demoPost(payload);
+      commit('setState', res);
+      return res;
     },
   },
 };

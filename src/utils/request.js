@@ -32,7 +32,7 @@ instance.interceptors.request.use(
   },
 );
 
-const request = async (url, method, data, silent = false, config) => {
+export const request = async (url, method, data, silent = false, config) => {
   try {
     const response = await instance({
       url,
@@ -63,8 +63,11 @@ const request = async (url, method, data, silent = false, config) => {
   }
 };
 
+export const get = (url, data, silent, config) => request(url, 'get', data, silent, config);
+export const post = (url, data, silent, config) => request(url, 'post', data, silent, config);
+
 export default {
-  get: (url, data, silent, config) => request(url, 'get', data, silent, config),
-  post: (url, data, silent, config) => request(url, 'post', data, silent, config),
+  get,
+  post,
   request,
 };
