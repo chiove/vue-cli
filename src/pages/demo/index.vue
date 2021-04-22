@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div>用户名：{{ name }}</div>
-    <div>密码：{{ password }}</div>
-  </div>
+  <div>demo</div>
 </template>
 
 <style lang="less">
@@ -19,10 +16,6 @@ export default {
     return {};
   },
   created() {
-    this.demoGet({
-      name: 'demo1',
-      password: 'demo',
-    });
   },
   mounted() { },
   computed: {

@@ -8,6 +8,14 @@ const routes = [
     ],
   },
   {
+    path: '/demo',
+    name: 'demo',
+    component: () => import(/* webpackChunkName: "demo" */ '../pages/demo'),
+    modules: [
+      import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
+    ],
+  },
+  {
     path: '/home',
     name: 'home',
     component: () => import(/* webpackChunkName: "home" */'../pages/home'),

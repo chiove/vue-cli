@@ -10,10 +10,10 @@ const { port, proxy, childProcess } = require('./config');
 const compiler = webpack(webpackConfig);
 const netWork = require('os').networkInterfaces();
 
-const server = new WebpackDevServer(compiler, {
+const options = {
   clientLogLevel: 'silent',
   contentBase: './build',
-  noInfo: true,
+  // hot: true,
   hotOnly: true,
   host: '0.0.0.0',
   proxy: {
@@ -22,7 +22,9 @@ const server = new WebpackDevServer(compiler, {
       ws: false,
     },
   },
-});
+};
+// WebpackDevServer.addDevServerEntrypoints(webpackConfig, options);
+const server = new WebpackDevServer(compiler, options);
 server.listen(port, '127.0.0.1', () => {
   compiler.hooks.done.tap('compiler', () => {
     if (childProcess) {

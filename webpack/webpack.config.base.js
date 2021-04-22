@@ -2,10 +2,8 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const path = require('path');
-const chalk = require('chalk');
 const { version } = require('../package.json');
 const { proxy } = require('../server/config');
 
@@ -52,11 +50,6 @@ module.exports = {
       __VERSION__: JSON.stringify(version),
       __BASE_URL__: JSON.stringify(proxy.baseUrl),
     }),
-    new ProgressBarPlugin({
-      format: `${chalk.cyan.bold('Compilation:') + chalk.magenta.bold('[:bar]')} ${chalk.cyan.bold(':percent')} (time：${chalk.cyan.bold(':elapsed')}s)`,
-      width: 500,
-      stream: process.stdout ? process.stdout : undefined,
-    }),
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -75,12 +68,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
-          },
+          devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -95,9 +83,7 @@ module.exports = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          devMode ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'less-loader',

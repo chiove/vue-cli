@@ -1,5 +1,5 @@
 <template>
-  <div @click="handleClick">我是首页</div>
+  <div>我是首页{{ text }}</div>
 </template>
 
 <style lang="less">
@@ -11,17 +11,14 @@ export default {
   name: '',
   components: {},
   data() {
-    return {};
+    return {
+      text: '',
+    };
   },
   created() { },
   mounted() {
-
   },
   methods: {
-    handleClick() {
-      this.$store.commit('home/setState', { c: 77 });
-      this.$router.push('/');
-    },
   },
 };
 </script>

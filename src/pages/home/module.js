@@ -2,7 +2,6 @@ export default {
   name: 'home',
   namespaced: true,
   state: {
-    c: '66',
   },
   mutations: {
     setState: (state, payload) => {
@@ -18,8 +17,6 @@ export default {
 
   },
   actions: {
-    home: ({ commit, state, dispatch }, payload) => {
 
-    },
   },
 };

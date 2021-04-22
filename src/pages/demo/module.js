@@ -4,8 +4,7 @@ export default {
   name: 'demo',
   namespaced: true,
   state: {
-    name: '',
-    password: '',
+    example: '',
   },
   mutations: {
     setState: (state, payload) => {
@@ -25,15 +24,16 @@ export default {
       const res = await demoGet(payload);
       if (res.code === 200) {
         commit('setState', {
-          name: res.data.name,
-          password: res.data.password,
+          example: res.data.name,
         });
       }
       return res;
     },
     post: async ({ commit }, payload) => {
       const res = await demoPost(payload);
-      commit('setState', res);
+      commit('setState', {
+        example: res.data.name,
+      });
       return res;
     },
   },

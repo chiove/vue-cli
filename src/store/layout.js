@@ -1,8 +1,9 @@
 export default {
-  name: 'login',
+  name: 'layout',
   namespaced: true,
   state: {
-    b: '1',
+    a: '1',
+    b: '2',
   },
   mutations: {
     setState: (state, payload) => {
@@ -18,8 +19,8 @@ export default {
 
   },
   actions: {
-    demo: ({ commit, state, dispatch }, payload) => {
-
+    change: ({ commit }, payload) => {
+      commit('setState', payload);
     },
   },
 };
