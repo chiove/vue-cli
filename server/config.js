@@ -1,6 +1,7 @@
 module.exports = {
   port: '3030',
-  childProcess: true, // 开启可在router中自定义接口，模拟数据请求
+  childProcessPort: '3000',
+  childProcess: true, // node子进程服务
   proxy: {
     baseUrl: '/api',
     dev: 'http://127.0.0.1:3000', // dev target

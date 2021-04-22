@@ -10,10 +10,11 @@
     "not dead"
   ],
   "scripts": {
-    "dev": "cross-env NODE_ENV=development node server/server.js",
-    "build:dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.config.prod.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js",
-    "build:zip": "cross-env NODE_ENV=production node server/zip-build.js"
+    "start": "cross-env NODE_ENV=development node server/server.js",
+    "dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.config.prod.js",
+    "prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js",
+    "zip": "cross-env NODE_ENV=production node server/zip-build.js",
+    "git": "git add -A && git commit -am 'update' && git push"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
