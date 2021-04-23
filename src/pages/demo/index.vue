@@ -13,11 +13,13 @@ export default {
   name: '',
   components: {},
   data() {
-    return {};
+    return {
+    };
   },
   created() {
   },
-  mounted() { },
+  mounted() {
+  },
   computed: {
     ...mapState({
       name: (state) => state.demo.name,
@@ -29,6 +31,9 @@ export default {
       demoGet: 'demo/get',
       demoPost: 'demo/post',
     }),
+    handleVideo() {
+      window.electron.video();
+    },
   },
 };
 </script>
