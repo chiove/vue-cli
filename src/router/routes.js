@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/',
-    name: 'demo',
+    name: '',
     component: () => import(/* webpackChunkName: "demo" */ '../pages/demo'),
     modules: [
       import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
