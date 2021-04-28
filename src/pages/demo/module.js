@@ -1,10 +1,11 @@
-import { demoGet, demoPost } from 'src/api/demo';
+import { demoGet, demoPost, getOne } from 'src/api/demo';
 
 export default {
   name: 'demo',
   namespaced: true,
   state: {
     example: '',
+    user: {},
   },
   mutations: {
     setState: (state, payload) => {
@@ -33,6 +34,13 @@ export default {
       const res = await demoPost(payload);
       commit('setState', {
         example: res.data.name,
+      });
+      return res;
+    },
+    getOne: async ({ commit }, payload) => {
+      const res = await getOne(payload);
+      commit('setState', {
+        user: res,
       });
       return res;
     },

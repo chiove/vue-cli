@@ -8,3 +8,8 @@ export const demoGet = (data) => {
 export const demoPost = (data) => {
   return post('/test', data);
 };
+
+
+export const getOne = (data) => {
+  return get(`/users/${data.id}`);
+};

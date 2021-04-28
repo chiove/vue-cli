@@ -24,14 +24,6 @@ const routes = [
     ],
   },
   {
-    path: '/socket-demo',
-    name: 'socket-demo',
-    component: () => import(/* webpackChunkName: "socket-demo" */'../pages/socket-demo'),
-    modules: [
-      import(/* webpackChunkName: "socket-demo-module" */ '../pages/socket-demo/module'),
-    ],
-  },
-  {
     path: '/*',
     name: 'not-found',
     component: () => import(/* webpackChunkName: "not-found" */ '../pages/not-found'),

@@ -13,7 +13,7 @@ const httpStatus = {
   505: 'HTTP版本不受支持',
 };
 
-const dataStatus = {
+const resStatus = {
   830: '登录失效',
 };
 
@@ -37,15 +37,15 @@ export const request = async (url, method, data, silent = false, config) => {
     const response = await instance({
       url,
       method,
-      [method === 'get' || method === 'delete' ? 'params' : 'data']: data,
+      [method === 'get' || method === 'delete' || method === 'put' ? 'params' : 'data']: data,
       config,
     });
     const res = response.data;
     if (!silent) {
       if (response.status === 200) {
-        if (res.code !== 200) {
-          console.log(dataStatus[response.status]);
-        }
+        // if (res.code !== 200) {
+        //   console.log(resStatus[response.status]);
+        // }
       } else {
         console.log(httpStatus[response.status]);
       }
