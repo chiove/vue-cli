@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
+import { Message } from 'ant-design-vue';
 
 const httpStatus = {
   400: '请求错误',
@@ -32,39 +33,58 @@ instance.interceptors.request.use(
   },
 );
 
-export const request = async (url, method, data, silent = false, config) => {
+const instanceAuth = axios.create({
+  // eslint-disable-next-line no-undef
+  baseURL: __BASE_URL__,
+  timeout: 3000,
+});
+
+instanceAuth.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+export const request = async (url, method, data, silent = false, config, auth) => {
+  const instanceRequest = auth ? instanceAuth : instance;
   try {
-    const response = await instance({
+    const response = await instanceRequest({
       url,
       method,
       [method === 'get' || method === 'delete' || method === 'put' ? 'params' : 'data']: data,
       config,
     });
     const res = response.data;
+
     if (!silent) {
       if (response.status === 200) {
-        // if (res.code !== 200) {
-        //   console.log(resStatus[response.status]);
-        // }
+        console.log(`-------------------- ${url} --------------------`);
+        console.log(res);
+        if (res.code !== 200) {
+          Message.warning(res.message);
+        }
       } else {
-        console.log(httpStatus[response.status]);
+        Message.error(httpStatus[response.status]);
       }
     }
     return res;
   } catch (error) {
     if (!silent) {
       if (error.response) {
-        console.log(httpStatus[error.response.status]);
+        Message.error(httpStatus[error.response.status]);
       } else if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-        console.log(httpStatus[408]);
+        Message.error(httpStatus[408]);
       }
     }
     return Promise.reject(error);
   }
 };
 
-export const get = (url, data, silent, config) => request(url, 'get', data, silent, config);
-export const post = (url, data, silent, config) => request(url, 'post', data, silent, config);
+export const get = (url, data, silent, config) => request(url, 'get', data, silent, config, true);
+export const post = (url, data, silent, config) => request(url, 'post', data, silent, config, true);
 
 export default {
   get,
