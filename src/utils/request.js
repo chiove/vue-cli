@@ -18,7 +18,6 @@ const resStatus = {
 };
 
 const instance = axios.create({
-  // eslint-disable-next-line no-undef
   baseURL: '',
   timeout: 3000,
 });
@@ -33,7 +32,6 @@ instance.interceptors.request.use(
 );
 
 const instanceAuth = axios.create({
-  // eslint-disable-next-line no-undef
   baseURL: '',
   timeout: 3000,
 });
@@ -73,9 +71,9 @@ export const request = async (url, method, data, silent = false, config, auth) =
   } catch (error) {
     if (!silent) {
       if (error.response) {
-        Message.error(httpStatus[error.response.status]);
+        console.log(httpStatus[error.response.status]);
       } else if (error.code === 'ECONNABORTED' && error.message.indexOf('timeout') !== -1) {
-        Message.error(httpStatus[408]);
+        console.log(httpStatus[408]);
       }
     }
     return Promise.reject(error);

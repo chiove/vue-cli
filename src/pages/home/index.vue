@@ -1,15 +1,17 @@
 <template>
-  <div @click="handleClick">我是首页{{ text }}</div>
+  <div class="container" @click="handleClick">我是首页<Button type="info">提交</Button></div>
 </template>
 
-<style lang="less">
-@import url("./style.less");
+<style lang="less" scoped>
+ @import url("./style.less");
 </style>
 <script>
+import { Button } from 'vant';
+
 export default {
   props: [],
   name: '',
-  components: {},
+  components: { Button },
   data() {
     return {
       text: '',
