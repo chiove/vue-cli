@@ -3,16 +3,16 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const path = require('path');
+const chalk = require('chalk');
 const { version } = require('../package.json');
-const { proxy } = require('../server/config');
 
 const devMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
   mode: process.env.NODE_ENV,
   devtool: devMode ? 'cheap-module-source-map' : 'source-map',
-  entry: [path.resolve(__dirname, '../src/index.js')],
   output: {
     path: path.resolve(__dirname, `../build-v${version}`),
     filename: 'static/js/[name].[hash:8].js',
@@ -48,7 +48,11 @@ module.exports = {
     new webpack.DefinePlugin({
       __NODE_ENV__: JSON.stringify(process.env.NODE_ENV),
       __VERSION__: JSON.stringify(version),
-      __BASE_URL__: JSON.stringify(proxy.baseUrl),
+    }),
+    new ProgressBarPlugin({
+      format: `${chalk.green('编译进度：') + chalk.green('[:bar]')} ${chalk.green(':percent')} (耗时：${chalk.green(':elapsed')}秒)`,
+      stream: process.stdout ? process.stdout : undefined,
+      clear: false,
     }),
   ],
   resolve: {

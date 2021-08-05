@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import { Message } from 'ant-design-vue';
 
 const httpStatus = {
   400: '请求错误',
@@ -20,7 +19,7 @@ const resStatus = {
 
 const instance = axios.create({
   // eslint-disable-next-line no-undef
-  baseURL: __BASE_URL__,
+  baseURL: '',
   timeout: 3000,
 });
 
@@ -35,7 +34,7 @@ instance.interceptors.request.use(
 
 const instanceAuth = axios.create({
   // eslint-disable-next-line no-undef
-  baseURL: __BASE_URL__,
+  baseURL: '',
   timeout: 3000,
 });
 
@@ -64,10 +63,10 @@ export const request = async (url, method, data, silent = false, config, auth) =
         console.log(`-------------------- ${url} --------------------`);
         console.log(res);
         if (res.code !== 200) {
-          Message.warning(res.message);
+          console.log(res.message);
         }
       } else {
-        Message.error(httpStatus[response.status]);
+        console.log(httpStatus[response.status]);
       }
     }
     return res;

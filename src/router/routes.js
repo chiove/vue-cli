@@ -4,7 +4,7 @@ const routes = [
     name: '',
     component: () => import(/* webpackChunkName: "demo" */ '../pages/demo'),
     modules: [
-      import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
+      // import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
     ],
   },
   {
@@ -12,7 +12,7 @@ const routes = [
     name: 'demo',
     component: () => import(/* webpackChunkName: "demo" */ '../pages/demo'),
     modules: [
-      import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
+      () => import(/* webpackChunkName: "demo-module" */ '../pages/demo/module'),
     ],
   },
   {
@@ -20,13 +20,16 @@ const routes = [
     name: 'home',
     component: () => import(/* webpackChunkName: "home" */'../pages/home'),
     modules: [
-      import(/* webpackChunkName: "home-module" */ '../pages/home/module'),
+      () => import(/* webpackChunkName: "home-module" */ '../pages/home/module'),
     ],
   },
   {
     path: '/*',
     name: 'not-found',
     component: () => import(/* webpackChunkName: "not-found" */ '../pages/not-found'),
+    modules: [
+      () => import(/* webpackChunkName: "not-found-module" */ '../pages/not-found/module'),
+    ],
   },
 ];
 

@@ -1,5 +1,5 @@
 <template>
-  <div>demo</div>
+  <div>1</div>
 </template>
 
 <style lang="less">

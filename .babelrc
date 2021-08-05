@@ -9,14 +9,6 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-transform-runtime",
-    [
-      "import",
-      {
-        "libraryName": "ant-design-vue",
-        "libraryDirectory": "es",
-        "style": true
-      }
-    ]
+    "@babel/plugin-transform-runtime"
   ]
 }

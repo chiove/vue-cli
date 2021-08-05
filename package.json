@@ -10,10 +10,11 @@
     "not dead"
   ],
   "scripts": {
-    "start": "cross-env NODE_ENV=development node server/server.js",
-    "dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.config.prod.js",
-    "prod": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js",
-    "zip": "cross-env NODE_ENV=production node server/zip-build.js"
+    "dev": "cross-env NODE_ENV=development node app/dev-server.js",
+    "prod": "cross-env NODE_ENV=development node app/prod-server.js",
+    "dev:build": "cross-env NODE_ENV=development webpack --config webpack/webpack.config.prod.js",
+    "prod:build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js",
+    "zip": "cross-env NODE_ENV=production node app/zip-build.js"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
@@ -51,12 +52,17 @@
     "webpack": "^4.17.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^5.1.1"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "ant-design-vue": "^1.7.4",
     "axios": "^0.21.1",
+    "http-proxy-middleware": "^2.0.1",
+    "koa-static": "^5.0.0",
+    "koa2-connect": "^1.0.2",
+    "kwm": "^1.0.4",
     "less": "^4.1.1",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",

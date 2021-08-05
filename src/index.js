@@ -1,12 +1,14 @@
 import Vue from 'vue';
-import Antd from 'ant-design-vue/es';
+import Router from 'vue-router';
+import Vuex from 'vuex';
 import App from './app.vue';
 import router from './router';
 import store from './store';
-import 'ant-design-vue/dist/antd.css';
 import './assets/style/style.less';
 
-Vue.use(Antd);
+
+Vue.use(Vuex);
+Vue.use(Router);
 // eslint-disable-next-line no-new
 new Vue({
   el: '#app',

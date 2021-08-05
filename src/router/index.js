@@ -12,14 +12,14 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   routes.forEach((route) => {
     if (to.name === route.name) {
-      Promise.all(route.modules || []).then((res) => {
-        res.forEach((item) => {
+      route.modules.forEach((getModule) => {
+        getModule().then((item) => {
           if (!store.hasModule(item.default.name)) {
             store.registerModule(item.default.name, item.default);
           }
         });
-        next();
       });
+      next();
     }
   });
 });

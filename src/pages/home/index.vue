@@ -1,5 +1,5 @@
 <template>
-  <div>我是首页{{ text }}</div>
+  <div @click="handleClick">我是首页{{ text }}</div>
 </template>
 
 <style lang="less">
@@ -19,6 +19,9 @@ export default {
   mounted() {
   },
   methods: {
+    handleClick() {
+      this.$router.history.push('demo');
+    },
   },
 };
 </script>
