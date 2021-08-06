@@ -13,12 +13,6 @@ export default {
         state[key] = payload[key];
       });
     },
-    resetSate: (state) => {
-      Object.keys(state).forEach((key) => {
-        state[key] = undefined;
-      });
-    },
-
   },
   actions: {
     get: async ({ commit }, payload) => {

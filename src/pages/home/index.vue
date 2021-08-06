@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="handleClick">我是首页<Button type="info">提交</Button></div>
+  <div class="container" @click="handleClick">我是首页你好<Button type="primary">提交{{text}}</Button></div>
 </template>
 
 <style lang="less" scoped>
@@ -7,6 +7,7 @@
 </style>
 <script>
 import { Button } from 'vant';
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
   props: [],
@@ -14,15 +15,21 @@ export default {
   components: { Button },
   data() {
     return {
-      text: '',
+      text1: '',
     };
   },
   created() { },
   mounted() {
+
+  },
+  computed: {
+    ...mapState('home', ['text']),
   },
   methods: {
+    ...mapActions('home', ['login']),
+    ...mapMutations('home', ['setState']),
     handleClick() {
-      this.$router.history.push('demo');
+      this.login({ text: '222' });
     },
   },
 };

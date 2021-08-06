@@ -1,7 +1,10 @@
+
+
 export default {
   name: 'home',
   namespaced: true,
   state: {
+    text: '测试',
   },
   mutations: {
     setState: (state, payload) => {
@@ -9,14 +12,12 @@ export default {
         state[key] = payload[key];
       });
     },
-    resetSate: (state) => {
-      Object.keys(state).forEach((key) => {
-        state[key] = undefined;
-      });
-    },
-
   },
   actions: {
-
+    login({ commit }, payload) {
+      commit('setState', {
+        text: payload.text,
+      });
+    },
   },
 };
