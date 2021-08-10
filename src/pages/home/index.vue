@@ -1,5 +1,5 @@
 <template>
-  <div class="container" @click="handleClick">我是首页你好<Button type="primary">提交{{text}}</Button></div>
+  <div class="container" @click="handleClick"><Button type="info">提交{{text}}</Button></div>
 </template>
 
 <style lang="less" scoped>
@@ -30,6 +30,9 @@ export default {
     ...mapMutations('home', ['setState']),
     handleClick() {
       this.login({ text: '222' });
+      setTimeout(() => {
+        this.$router.history.push('./demo');
+      }, 2000);
     },
   },
 };
