@@ -8,7 +8,6 @@ const kwm = require('kwm');
 const chalk = require('chalk');
 const https = require('https');
 const k2c = require('koa2-connect');
-const netWork = require('os').networkInterfaces();
 
 const router = require('./router');
 const webpackConfig = require('../webpack/webpack.config.dev.js');
@@ -45,14 +44,24 @@ const listen = (server) => {
         console.log(chalk.green(`\r\nTimes: ${times} ms`));
         console.log(chalk.green('\rApp running at:'));
         console.log(chalk.green('-Local:  '), chalk.cyan(`🚀${config.https ? 'https' : 'http'}://127.0.0.1:${config.port}`));
-        if (netWork.en0 || netWork.WLAN) {
-          const ip = (netWork.en0 && netWork.en0[1].address) ||
-           (netWork.WLAN && netWork.WLAN[1].address);
-          console.log(chalk.green('-Network:'), chalk.cyan(`🚀 ${config.https ? 'https' : 'http'}://${ip}:${config.port}`));
-        }
+        console.log(chalk.green('-Network:'), chalk.cyan(`🚀 ${config.https ? 'https' : 'http'}://${getLocalIp()}:${config.port}`));
       });
     });
   });
+};
+
+const getLocalIp = () => {
+  const netWork = require('os').networkInterfaces();
+  let ip = '';
+  Object.keys(netWork).forEach((name) => {
+    const iface = netWork[name];
+    iface.forEach((item) => {
+      if (item.family === 'IPv4' && item.address !== '127.0.0.1' && !item.internal) {
+        ip = item.address;
+      }
+    });
+  });
+  return ip;
 };
 
 start();
